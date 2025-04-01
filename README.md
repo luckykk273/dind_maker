@@ -1,2 +1,2 @@
-# docker_maker
-A convenient tool to package Docker commands with Makefile.
+# dind_maker
+A convenient tool to create Docker-in-Docker(DinD) with Makefile.
