@@ -15,6 +15,7 @@ RUN apt-get update
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
     curl \
     sudo \
+    vim \
     apt-utils
 
 # Install Docker conveniently with the script.
@@ -24,16 +25,16 @@ RUN /bin/sh get-docker.sh
 # Create Docker group which ID is the same as the one on the host.
 # Note: because a simple Docker in Docker is used(connect the Docker daemon on the host),
 #       we MUST ensure that the Docker GID is the same as the one on the host.
-
-# TODO: Fix the error if ${DOCKER_GID} is used by other system services.
-RUN if getent group docker >/dev/null; then \
-        EXISTING_DOCKER_GID=$(getent group docker | cut -d: -f3); \
-        if [ "${EXISTING_DOCKER_GID}" -ne "${DOCKER_GID}" ]; then \
-            groupmod -g ${DOCKER_GID} docker || true; \
+RUN if getent group ${DOCKER_GID} > /dev/null; then \
+        CONFLICT_GROUP=$(getent group ${DOCKER_GID} | cut -d: -f1); \
+        if ! getent group docker > /dev/null; then \
+            groupadd docker; \
         fi; \
-    else \
-        groupadd -g ${DOCKER_GID} docker; \
-    fi
+        EXISTING_DOCKER_GID=$(getent group docker | cut -d: -f3); \
+        groupdel docker; \
+        groupmod -g ${EXISTING_DOCKER_GID} ${CONFLICT_GROUP}; \
+    fi && \
+    groupadd -g ${DOCKER_GID} docker
 
 # Create a user with the same UID, GID and add it to Docker group.
 

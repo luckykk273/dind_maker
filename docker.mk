@@ -219,7 +219,6 @@ docker_run: docker_prerun
 			-e VOLUME_PATH=/mnt/$(VOLUME_NAME) \
 			--volume $(VOLUME_NAME):/mnt/$(VOLUME_NAME) \
 			--hostname=$(HOSTNAME) \
-			--group-add docker \
 			--privileged \
 			--name=$(CONTAINER_NAME) $(IMAGE_NAME) /bin/bash; \
 	fi
