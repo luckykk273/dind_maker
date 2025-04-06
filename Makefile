@@ -1,7 +1,7 @@
 CURRENT_DIR := $(realpath $(dir $(lastword $(MAKEFILE_LIST))))
 CURRENT_DIRNAME := $(notdir $(abspath $(dir $(lastword $(MAKEFILE_LIST)))))
 
-PROJECT_PREFIX ?= docker_maker
+PROJECT_PREFIX ?= dind_maker
 DETACH ?= 0
 RUN_MODE := $(if $(filter 0,$(DETACH)),-it,-d)
 USER := $(shell whoami)

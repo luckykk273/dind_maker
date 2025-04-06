@@ -1,5 +1,5 @@
 # Set the base image
-FROM ubuntu:latest
+FROM debian:latest
 
 # Default build args to ensure Docker runs correctly
 ARG PROJECT_DIR=/
@@ -16,6 +16,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
     curl \
     sudo \
     vim \
+    make \
     apt-utils
 
 # Install Docker conveniently with the script.
@@ -50,7 +51,7 @@ RUN useradd -u ${UID} -G sudo ${USER} && \
 
 # Explicitly create the directory `/home/<user>` and change its ownership so that
 # the user can access it outside of `/home/<user>`.
-RUN mkdir -p /home/${USER} && chown ${USER}:${USER} /home/${USER}
+RUN mkdir -p /home/${USER} && chown ${USER}:${USER} /home/${USER} && touch /home/${USER}/.sudo_as_admin_successful
 
 # Switch to the created user
 USER ${USER}
