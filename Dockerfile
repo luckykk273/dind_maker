@@ -32,9 +32,9 @@ RUN if getent group ${DOCKER_GID} > /dev/null; then \
             groupadd docker; \
         fi; \
         EXISTING_DOCKER_GID=$(getent group docker | cut -d: -f3); \
-        groupdel docker; \
         groupmod -g ${EXISTING_DOCKER_GID} ${CONFLICT_GROUP}; \
     fi && \
+    groupdel docker && \
     groupadd -g ${DOCKER_GID} docker
 
 # Create a user with the same UID, GID and add it to Docker group.
