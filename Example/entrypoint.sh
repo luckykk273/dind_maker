@@ -3,6 +3,8 @@
 # Clone the code repository recursively.
 git clone --recurse-submodules https://github.com/sonic-net/sonic-buildimage.git
 
+cd sonic-buildimage
+
 # Ensure the 'overlay' module is loaded on your development system
 sudo modprobe overlay
 
