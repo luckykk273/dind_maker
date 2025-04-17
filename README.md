@@ -77,10 +77,6 @@ If someone wants to create the DinD container recursively(though it is less usef
 ## Wiki
 Some advanced usage or configurations can be achieved. Please refer to the [Wiki](https://github.com/luckykk273/dind_maker/wiki).
 
-## Todo
-1. Add an example of building SONiC.
-2. Write wiki page.
-
 ## Reference
 1. [dockerdocs - Install Docker Engine](https://docs.docker.com/engine/install/)
 2. [Docker-in-Docker: Containerized CI Workflows](https://www.docker.com/resources/docker-in-docker-containerized-ci-workflows-dockercon-2023/)
